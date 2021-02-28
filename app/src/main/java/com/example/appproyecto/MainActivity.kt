@@ -34,16 +34,27 @@ class MainActivity : AppCompatActivity() {
         val btn1 = findViewById<Button>(R.id.button1)
         val btn2 = findViewById<Button>(R.id.button2)
         val btn3 = findViewById<Button>(R.id.button3)
+        val btn4 = findViewById<Button>(R.id.button4)
 
         // -------------------------------------------------------------------------------------
         // Para entrar a las otras pestañas
         // -------------------------------------------------------------------------------------
 
-        // 2 - Para entrar a la pestaña de Contactos de Emergencia
-        btn2.setOnClickListener {
+        // 1 - Para entrar a Mapas para ver los centros de atención
+        btn1.setOnClickListener {
+            val intent = Intent(this, MapsAttentionCenters::class.java)
+            startActivity(intent)
+        }
+
+        // 2 - Para entrar a ver las estadísticas
+
+        // 3 - Para entrar a ver la pestaña de Contactos de Emergencia
+        btn3.setOnClickListener {
             val intent = Intent(this, Contactos::class.java)
             startActivity(intent)
         }
+
+        // 4 - Para entrar a ver el listado de noticias
 
     }
 }

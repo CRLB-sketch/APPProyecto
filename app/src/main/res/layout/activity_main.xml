@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:text="@string/text_btn1"
         android:textSize="18sp"
@@ -33,8 +33,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:text="@string/text_btn2"
         android:textSize="18sp"
@@ -44,13 +44,24 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:text="@string/text_btn3"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="354dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_btn4"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

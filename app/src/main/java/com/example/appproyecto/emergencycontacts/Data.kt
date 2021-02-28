@@ -14,7 +14,7 @@
  *
  **/
 
-package com.example.appproyecto
+package com.example.appproyecto.emergencycontacts
 
 class Data {
 

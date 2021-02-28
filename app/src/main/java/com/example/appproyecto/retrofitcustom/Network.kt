@@ -13,7 +13,7 @@
  *
  **/
 
-package com.example.appproyecto
+package com.example.appproyecto.retrofitcustom
 
 import android.content.Context
 import android.net.ConnectivityManager
