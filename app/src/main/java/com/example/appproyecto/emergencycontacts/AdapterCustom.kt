@@ -1,9 +1,11 @@
+package com.example.appproyecto.emergencycontacts
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> AdapterCustom </h2>
  *
  * Esta clase nos ayudará a tener nuestro adaptador personalizado
- * para los contactos que se van a instanciar en la app
+ * para los contactos que se van a instanciar en la app.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -14,8 +16,6 @@
  *
  **/
 
-package com.example.appproyecto
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.appproyecto.R
 import com.squareup.picasso.Picasso
 
 class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
@@ -49,7 +50,7 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var viewHolder:ViewHolder? = null
+        var viewHolder: ViewHolder? = null
         var view:View? = convertView
 
         if(view == null){

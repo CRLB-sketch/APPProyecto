@@ -1,8 +1,10 @@
+package com.example.appproyecto.retrofitcustom
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Network </h2>
  *
- * Esta clase nos ayudará a verificar si hay red o no
+ * Esta clase nos ayudará a verificar si hay red o no.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -12,8 +14,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto
 
 import android.content.Context
 import android.net.ConnectivityManager

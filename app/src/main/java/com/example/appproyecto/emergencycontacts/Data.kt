@@ -1,9 +1,11 @@
+package com.example.appproyecto.emergencycontacts
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Data </h2>
  *
  * Esta clase es la que tendrá los atributos necesarios para tener los
- * datos completos del contacto de emergencia
+ * datos completos del contacto de emergencia.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -13,8 +15,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto
 
 class Data {
 

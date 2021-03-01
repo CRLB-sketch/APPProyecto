@@ -1,8 +1,10 @@
+package com.example.appproyecto
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Contactos </h2>
  *
- * Esta clase será para programar la actividad de contactos
+ * Esta clase será para programar la actividad de contactos.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -12,8 +14,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,17 +28,21 @@ import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.appproyecto.emergencycontacts.AdapterCustom
+import com.example.appproyecto.emergencycontacts.Data
+import com.example.appproyecto.emergencycontacts.EmergencyContact
+import com.example.appproyecto.retrofitcustom.Network
+import com.example.appproyecto.retrofitcustom.Utils
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_contactos.*
+import kotlinx.android.synthetic.main.activity_contacts.*
 import java.lang.Exception
-import java.util.jar.Manifest
 
 
 class Contactos : AppCompatActivity() {
 
     // --> Atributos globales
     var list: ListView? = null
-    var adapter:AdapterCustom? = null
+    var adapter: AdapterCustom? = null
     val REQUEST_PHONE_CALL = 1
     var auxPos: Int = 0
 
@@ -49,7 +53,7 @@ class Contactos : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contactos)
+        setContentView(R.layout.activity_contacts)
 
         // Aquí comenzará el código ------------------------------------------------------------
 
@@ -59,7 +63,7 @@ class Contactos : AppCompatActivity() {
         // Para revisar la conexión a internet
         if(Network.avalibleRed(this)){
             // Si sale bien se llevará a cabo la solicitud
-            requestHTTPVolley("http://gtpreviene.researchmobile.co:3000/api/information")
+            requestContacts(Utils.URL_EMERGENCY_CONTACTS)
 
         }else{
             Toast.makeText(this,"No hay conexion", Toast.LENGTH_SHORT).show()
@@ -67,14 +71,13 @@ class Contactos : AppCompatActivity() {
 
     }
 
-    private fun requestHTTPVolley(url:String) {
-        val queue = Volley.newRequestQueue(this) // Buscar nueva cola
+    private fun requestContacts(url:String) {
+        val queue = Volley.newRequestQueue(this)
 
-        // Formular solicitud
         val request = StringRequest(Request.Method.GET, url, {
             response ->
             try {
-                Log.d("requestHTTPVolley", response)
+                Log.d("requestContacts", response)
 
                 val gson = Gson()
                 val the_contact = gson.fromJson(response, EmergencyContact::class.java)

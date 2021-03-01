@@ -3,7 +3,15 @@
 
     <string name="text_main">¿Qué Deseas Hacer?</string>
     <string name="text_btn1">Ver Centros de Atención</string>
-    <string name="text_btn2">Ver Contactos de Emergencia</string>
-    <string name="text_btn3">Ver Listado de Noticias</string>
+    <string name="text_btn2">Ver Estadísticas</string>
+    <string name="text_btn3">Ver Contactos de Emergencia</string>
+    <string name="text_btn4">Ver Listado de Noticias</string>
+
+    <string name="title_activity_maps_attention_centers">MapsAttentionCenters</string>
+
+    <string name="statistics">Estadísticas Coronavirus</string>
+    <string name="confirmed">Casos Confirmados: </string>
+    <string name="dead">Muertos: </string>
+    <string name="Recover">Recuperados: </string>
 
 </resources>
