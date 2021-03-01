@@ -1,8 +1,10 @@
+package com.example.appproyecto.emergencycontacts
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Emergency Contact </h2>
  *
- * Esta clase representará un contacto de emergencia
+ * Esta clase representará un contacto de emergencia.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -12,8 +14,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto.emergencycontacts
 
 class EmergencyContact {
 

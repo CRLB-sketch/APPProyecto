@@ -1,9 +1,11 @@
+package com.example.appproyecto.emergencycontacts
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> AdapterCustom </h2>
  *
  * Esta clase nos ayudará a tener nuestro adaptador personalizado
- * para los contactos que se van a instanciar en la app
+ * para los contactos que se van a instanciar en la app.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -13,8 +15,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto.emergencycontacts
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,8 +1,10 @@
+package com.example.appproyecto
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Contactos </h2>
  *
- * Esta clase será para programar la actividad de contactos
+ * Esta clase será para programar la actividad de contactos.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -12,8 +14,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -74,7 +74,6 @@ class Contactos : AppCompatActivity() {
     private fun requestContacts(url:String) {
         val queue = Volley.newRequestQueue(this)
 
-        // Formular solicitud
         val request = StringRequest(Request.Method.GET, url, {
             response ->
             try {

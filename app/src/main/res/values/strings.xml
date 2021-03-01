@@ -6,11 +6,12 @@
     <string name="text_btn2">Ver Estadísticas</string>
     <string name="text_btn3">Ver Contactos de Emergencia</string>
     <string name="text_btn4">Ver Listado de Noticias</string>
+
     <string name="title_activity_maps_attention_centers">MapsAttentionCenters</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
+
+    <string name="statistics">Estadísticas Coronavirus</string>
+    <string name="confirmed">Casos Confirmados: </string>
+    <string name="dead">Muertos: </string>
+    <string name="Recover">Recuperados: </string>
 
 </resources>

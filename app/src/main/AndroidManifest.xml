@@ -17,19 +17,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.APPProyecto">
+        <activity android:name=".Statistics"></activity>
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCegha-8Ee1350_MxCNKkQ6lJU54_J_eck"></meta-data>
+            android:value="AIzaSyCegha-8Ee1350_MxCNKkQ6lJU54_J_eck" />
 
         <activity android:name=".MapsAttentionCenters" />
-
         <activity android:name=".Contactos" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

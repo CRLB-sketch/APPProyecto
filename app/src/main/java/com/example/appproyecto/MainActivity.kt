@@ -1,8 +1,10 @@
+package com.example.appproyecto
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Main Activity </h2>
  *
- * Esta parte será donde se programar la pestaña principal
+ * Esta parte será donde se programar la pestaña principal.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
@@ -12,8 +14,6 @@
  * @since 2020-Enero-19
  *
  **/
-
-package com.example.appproyecto
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 2 - Para entrar a ver las estadísticas
+        btn2.setOnClickListener {
+            val intent = Intent(this, Statistics::class.java)
+            startActivity(intent)
+        }
 
         // 3 - Para entrar a ver la pestaña de Contactos de Emergencia
         btn3.setOnClickListener {
@@ -57,4 +61,5 @@ class MainActivity : AppCompatActivity() {
         // 4 - Para entrar a ver el listado de noticias
 
     }
+
 }
