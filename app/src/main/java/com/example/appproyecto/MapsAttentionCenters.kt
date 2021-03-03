@@ -17,8 +17,6 @@ package com.example.appproyecto
  **/
 
 import android.Manifest
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -26,9 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.appproyecto.maps.MapAPI
-import com.example.appproyecto.maps.Maps
-import com.example.appproyecto.retrofitcustom.Network
+import com.example.appproyecto.maps.Center
 import com.example.appproyecto.retrofitcustom.Utils
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -37,12 +33,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception
 
 class MapsAttentionCenters : AppCompatActivity(), OnMapReadyCallback {
@@ -63,53 +53,40 @@ class MapsAttentionCenters : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap : GoogleMap) {
         map = googleMap
-        createMarkers()
+        createMarkers(Utils.URL_ATTENTION_CENTERS)
     }
 
-    private fun createMarkers() {
+    private fun createMarkers(url:String) {
 
-        val retrofit = Retrofit.Builder().baseUrl(Utils.URL_BASE)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+        val queue = Volley.newRequestQueue(this)
 
-        val mapAPI = retrofit.create(MapAPI::class.java)
-        val call = mapAPI.find("centres")
-        call?.enqueue(object : Callback<List<Maps>> {
-            override fun onResponse(call: Call<List<Maps>>, response: Response<List<Maps>>) {
-                try {
+        val request = StringRequest(Request.Method.GET, url, {
+            response ->
+            try {
+                Log.d("createMarkers", response)
 
-                    //  Toast.makeText(this@MapsAttentionCenters, "Listo", Toast.LENGTH_SHORT).show()
+                val gson = Gson()
+                val center = gson.fromJson(response, Center::class.java)
 
-                    var position: LatLng? = null
+                var the_size: Int = center.size
+                var the_index: Int = the_size - 1
 
-                    for(local in response.body()!!){
-                        position = LatLng(local.latitude?.toDouble()!!, local.longitude?.toDouble()!!)
-                        map!!.addMarker(MarkerOptions().position(position).title(local.name))
-                    }
-
-                    map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 8f))
-                    map!!.setOnMarkerClickListener { marker ->
-                        val latLng = marker.position
-                        if (EasyPermissions.hasPermissions(this@MapsAttentionCenters, *perms)) {
-                            val uri = "http://maps.google.com/maps?q=loc:" + latLng.latitude + "," + latLng.longitude + " (" + marker.title + ")"
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-                            intent.flags = Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                            intent.flags = Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP
-                            intent.data = Uri.parse(uri)
-                            startActivity(intent)
-                        }
-                        true
-                    }
-
-                }catch (ex:Exception){
-                    Toast.makeText(this@MapsAttentionCenters, ex.message, Toast.LENGTH_SHORT).show()
+                // Para agregar todos los marcadores de los centros de salud
+                for(i in 0..the_index){
+                    val coordinates = LatLng(center.get(i).latitude.toDouble(), center.get(i).longitude.toDouble())
+                    val marker = MarkerOptions().position(coordinates).title(center.get(i).name)
+                    map.addMarker(marker)
                 }
-            }
 
-            override fun onFailure(call: Call<List<Maps>>, t: Throwable) {
-                Toast.makeText(this@MapsAttentionCenters, "Ocurrio un error :(", Toast.LENGTH_SHORT).show()
+                // Posisionar la camara
+                val guateCoordinates = LatLng(15.756965, -90.4155727)
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(guateCoordinates, 7f), 4000, null)
+
+            }catch (e: Exception){
+                Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
             }
-        })
+        }, { })
+
+        queue.add(request)
     }
 }
-
-private fun <T> Call<T>?.enqueue(callback: Callback<List<Maps>>) { }

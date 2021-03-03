@@ -57,8 +57,7 @@ class Contactos : AppCompatActivity() {
 
         // Aquí comenzará el código ------------------------------------------------------------
 
-        // Para implementar la toolbar
-        setSupportActionBar(toolbar)
+        // setSupportActionBar(toolbar)
 
         // Para revisar la conexión a internet
         if(Network.avalibleRed(this)){
