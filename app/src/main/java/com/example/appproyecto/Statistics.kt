@@ -64,7 +64,6 @@ class Statistics : AppCompatActivity() {
 
                 val gson = Gson()
                 val information = gson.fromJson(response, Information::class.java)
-                Log.d("GSON", information.country)
 
                 // Vamos a empezar a instanciar la información obtenida
                 country?.text = information.country
