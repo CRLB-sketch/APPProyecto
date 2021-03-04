@@ -37,18 +37,43 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
     }
 
     // --> Métodos
+
+    /**
+     * Obtener la cantidad de elementos del ArrayList de los contactos por medio de este método
+     *
+     * @return      Cantidad de elementos
+     */
     override fun getCount(): Int {
         return this.items?.count()!!
     }
 
+    /**
+     * Otbener el item selecionado
+     *
+     * @param position  La posición del item que se seleccionará
+     * @return          El item seleccionado
+     */
     override fun getItem(position: Int): Any {
         return this.items?.get(position)!!
     }
 
+    /**
+     * Método para obtener el item por medio de un Id
+     *
+     * @param position  La posición del item que se seleccionará
+     * @return          Cantidad/tamaño del item seleccionado
+     */
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
+    /**
+     * Método para obtener la vista de un template en específico
+     *
+     * @param position      Posición del template seleccionado
+     * @param convertView   la vista para convertirlo
+     * @param parent        Obtener el parent de la vista
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var viewHolder: ViewHolder? = null
         var view:View? = convertView
@@ -62,6 +87,7 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
             viewHolder = view.tag as? ViewHolder
         }
 
+        // Para obtener el item específico ya seleccionado
         val item = getItem(position) as Data
 
         viewHolder?.title?.text = item.title
@@ -71,6 +97,12 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
         return view!!
     }
 
+    /**
+     * Con la ayuda de este método se instanciará la información por cada template creado
+     *
+     * @param view  La vista del layout que se cargará
+     * @see         Información de cada template de contacto de emergencia
+     */
     private class ViewHolder(view:View){
         var title:TextView? = null
         var icon: ImageView? = null

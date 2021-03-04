@@ -40,7 +40,7 @@ import java.lang.Exception
 
 class Contactos : AppCompatActivity() {
 
-    // --> Atributos globales
+    // --> Atributos Globales
     var list: ListView? = null
     var adapter: AdapterCustom? = null
     val REQUEST_PHONE_CALL = 1
@@ -70,6 +70,13 @@ class Contactos : AppCompatActivity() {
 
     }
 
+    /**
+     * Este método obtendrá los datos de la api de los contactos de emergencía
+     * y aparte se agregarán los contactos obtenidos de la api.
+     *
+     * @param url   Para solicitar el url de los contactos de emergencia
+     * @see         Los contactos encontrados
+     */
     private fun requestContacts(url:String) {
         val queue = Volley.newRequestQueue(this)
 
@@ -78,12 +85,14 @@ class Contactos : AppCompatActivity() {
             try {
                 Log.d("requestContacts", response)
 
+                // Se creará el objeto, para este caso el contacto de emergencia
                 val gson = Gson()
                 val the_contact = gson.fromJson(response, EmergencyContact::class.java)
-                // Log.d("GSON", the_contact.whatsapp_phone)
 
+                // Se inicializará el ArrayList donde se almacenará los contactos de emergencia
                 emergencyContacts = ArrayList()
 
+                // Para obtener el tamaño de los contactos que estan en la api
                 var the_size:Int = the_contact.data?.size?.toInt()!!
                 var the_index:Int = the_size - 1
 
@@ -105,10 +114,9 @@ class Contactos : AppCompatActivity() {
 
                     // Vamos a verificar si obtubimos el permiso o no
                     if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-
                         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE) ,REQUEST_PHONE_CALL)
                     }else{
-                        // Si todo esta en orden se procederá a realizar la llamada
+                        // Si se accedio el permiso esta en orden se procederá a realizar la llamada
                         auxPos = position
                         makeCall()
                     }
@@ -123,21 +131,41 @@ class Contactos : AppCompatActivity() {
         queue.add(request) // Añadirlo a mi cola
     }
 
+    /**
+     * Método para llevar a cabo la llamada del contacto seleccionado
+     */
     private fun makeCall(){
         val callIntent = Intent(Intent.ACTION_CALL)
         callIntent.data = Uri.parse("tel:" + emergencyContacts?.get(auxPos)?.phone.toString())
         startActivity(callIntent)
     }
 
+    /**
+     * Método para pedir los permisos si es primera vez que se pide/abre el app
+     *
+     * @param requestCode   Codigo de la solicitud
+     * @param permissions   Los permisos accedidos
+     * @param grantResults  Tener verificado los resultados
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if(requestCode == REQUEST_PHONE_CALL)makeCall()
     }
 
+    /**
+     * Método para tener las opciones que se pueden llevar a cabo
+     *
+     * @param menu  Este mismo menu
+     * @return      El menu creado
+     * @see         Toolbar
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_emergency_contact, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    /**
+     * Para tener un mejor control con el adaptador personalizado
+     */
     override fun onResume() {
         super.onResume()
         adapter?.notifyDataSetChanged()
