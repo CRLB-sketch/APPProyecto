@@ -4,7 +4,7 @@ package com.example.appproyecto.maps
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Center </h2>
  *
- * Esta clase representará toda la colección de los centros.
+ * Esta clase representará toda la colección de los centros de salud.
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *

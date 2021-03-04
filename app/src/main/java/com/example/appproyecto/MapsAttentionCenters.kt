@@ -46,16 +46,32 @@ class MapsAttentionCenters : AppCompatActivity(), OnMapReadyCallback {
         createFragment()
     }
 
+    /**
+     * Método para crear el fragmento del mapa que se mostrará
+     *
+     * @see             El fragmento creado en el proyecto
+     */
     private fun createFragment(){
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
+    /**
+     * Método para identificar si el mapa ya estará listo
+     *
+     * @param googleMap El mapa de google que será utilizado
+     * @see             El mapa con sus marcadores
+     */
     override fun onMapReady(googleMap : GoogleMap) {
         map = googleMap
         createMarkers(Utils.URL_ATTENTION_CENTERS)
     }
 
+    /**
+     * Método para obtener los datos de la api de los centros de salud de Guatemala
+     *
+     * @param url   Para solicitar el url de los marcadores
+     */
     private fun createMarkers(url:String) {
 
         val queue = Volley.newRequestQueue(this)
@@ -65,9 +81,11 @@ class MapsAttentionCenters : AppCompatActivity(), OnMapReadyCallback {
             try {
                 Log.d("createMarkers", response)
 
+                // Se creará el objeto, para este caso el centro de atención
                 val gson = Gson()
                 val center = gson.fromJson(response, Center::class.java)
 
+                // Para obtener el tamaño de la lista de los centros de salud de la api
                 var the_size: Int = center.size
                 var the_index: Int = the_size - 1
 

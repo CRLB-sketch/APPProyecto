@@ -22,6 +22,13 @@ import androidx.appcompat.app.AppCompatActivity
 class Network {
 
     companion object {
+
+        /**
+         * Método para verificar si hay red conectado o no
+         *
+         * @param activity  La actividad en donde se llavará a cabo
+         * @return          La información detectada
+         */
         fun avalibleRed(activity: AppCompatActivity):Boolean{
             val connectivityManeger = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkInfo = connectivityManeger.activeNetworkInfo
