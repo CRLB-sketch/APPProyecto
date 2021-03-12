@@ -59,7 +59,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 4 - Para entrar a ver el listado de noticias
-
+        btn4.setOnClickListener {
+            val intent = Intent(this, newsGT::class.java)
+            startActivity(intent)
+        }
     }
 
 }

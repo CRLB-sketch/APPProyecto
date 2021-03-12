@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.APPProyecto">
-        <activity android:name=".Statistics"></activity>
+        <activity android:name=".newsGT"></activity>
+        <activity android:name=".Statistics" />
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
