@@ -3,6 +3,7 @@ package com.example.appproyecto.news
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appproyecto.R
 import kotlinx.android.synthetic.main.item_new.view.*
@@ -16,6 +17,7 @@ class newsAdapter(val newJsonItem: List<newJsonItem>):RecyclerView.Adapter<newsA
             view.tvTitle.text = newitem.title
             view.tvDate.text = newitem.start
             view.tvContent.text = newitem.detail
+            view.setOnClickListener{Toast.makeText(view.context, "Texto aquí ", Toast.LENGTH_SHORT).show()}
         }
     }
 
