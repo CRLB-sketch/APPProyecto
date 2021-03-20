@@ -8,6 +8,7 @@ import com.example.appproyecto.news.newsAdapter
 import kotlinx.android.synthetic.main.activity_news_g_t.*
 import kotlinx.android.synthetic.main.template_contact.view.*
 import com.example.appproyecto.news.newJsonItem as newJsonItem
+import com.example.appproyecto.news.newJson as array
 
 class newsGT : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class newsGT : AppCompatActivity() {
 
     fun initRecycler(){
         rvNewsGt.layoutManager = LinearLayoutManager(this)
-        //val adapter = newsAdapter(newJsonItem = newJsonItem)
+        //val adapter = newsAdapter(array)
 
     }
 }

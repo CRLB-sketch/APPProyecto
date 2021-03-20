@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appproyecto.R
 import kotlinx.android.synthetic.main.item_new.view.*
 
+
 class newsAdapter(val newJsonItem: List<newJsonItem>):RecyclerView.Adapter<newsAdapter.newsHolder>(){
 
 
@@ -24,7 +25,7 @@ class newsAdapter(val newJsonItem: List<newJsonItem>):RecyclerView.Adapter<newsA
     }
 
     override fun onBindViewHolder(holder: newsHolder, position: Int) {
-        holder
+        holder.render(newJsonItem[position])
     }
 
     override fun getItemCount(): Int {
