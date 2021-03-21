@@ -3,35 +3,65 @@ package com.example.appproyecto.news
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appproyecto.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_new.view.*
 
 
-class newsAdapter(val newJsonItem: List<newJsonItem>):RecyclerView.Adapter<newsAdapter.newsHolder>(){
+class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): RecyclerView.Adapter<newsAdapter.NewsHolder>() {
 
+    var items: ArrayList<NewsObj>? = null
 
-    class newsHolder(val view: View):RecyclerView.ViewHolder(view){
-        fun render(newitem:newJsonItem) {
-            view.tvTitle.text = newitem.title
-            view.tvDate.text = newitem.start
-            view.tvContent.text = newitem.detail
-            view.setOnClickListener{Toast.makeText(view.context, "Texto aquí ", Toast.LENGTH_SHORT).show()}
-        }
+    var viewHolder: NewsHolder? = null
+
+    init {
+        this.items = items
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): newsHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        return newsHolder(layoutInflater.inflate(R.layout.item_new, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
+        val the_view = LayoutInflater.from(parent?.context).inflate(R.layout.item_new, parent, false)
+        viewHolder = NewsHolder(the_view, listener)
+
+        return viewHolder!!
     }
 
-    override fun onBindViewHolder(holder: newsHolder, position: Int) {
-        holder.render(newJsonItem[position])
+    override fun onBindViewHolder(holder: NewsHolder, position: Int) {
+        val item = items?.get(position)
+
+        holder.title?.text = item?.title
+        Picasso.get().load(item?.image).into(viewHolder?.image)
     }
 
     override fun getItemCount(): Int {
-       return newJsonItem.size
+        return items?.count()!!
+    }
+
+    class NewsHolder(view: View, listener: ClickListener): RecyclerView.ViewHolder(view), View.OnClickListener {
+
+        var view = view
+
+        var title: TextView? = null
+        var image: ImageView? = null
+
+        var listener: ClickListener? = null
+
+        init {
+            title = view.findViewById(R.id.tvTitleM)
+            image = view.findViewById(R.id.ivImageM)
+
+            this.listener = listener
+
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            this.listener?.onClick(v!!, adapterPosition)
+        }
+
     }
 
 }
