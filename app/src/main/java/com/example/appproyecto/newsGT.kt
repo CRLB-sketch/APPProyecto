@@ -38,7 +38,7 @@ class newsGT : AppCompatActivity() {
 
 
         if(Network.avalibleRed(this)){
-
+            apiSolicitude(Utils.URL_NOTICES_LIST)
         }else{
             Toast.makeText(this,"No hay conexion", Toast.LENGTH_SHORT).show()
         }
