@@ -1,5 +1,6 @@
 package com.example.appproyecto
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,6 +21,7 @@ import com.android.volley.Request
 import android.util.Log
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.appproyecto.news.newsDetail
 import com.google.gson.Gson
 import java.net.URL
 
@@ -28,28 +30,29 @@ class newsGT : AppCompatActivity() {
     var list: RecyclerView? = null
     var adapter: newsAdapter? = null
     var layourManeger: RecyclerView.LayoutManager? = null
-    // ArrayList para agregar las noticias
-    var the_notices = ArrayList<NewsObj>()
+
+    val TAG = "com.example.appproyecto.news.newsadapter.NEWSOBJ"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_g_t)
 
-
+        // ArrayList para agregar las noticias
+        val the_notices = ArrayList<NewsObj>()
 
         if(Network.avalibleRed(this)){
-            apiSolicitude(Utils.URL_NOTICES_LIST)
+            apiSolicitude(Utils.URL_NOTICES_LIST, the_notices)
         }else{
             Toast.makeText(this,"No hay conexion", Toast.LENGTH_SHORT).show()
         }
-        /*
+
         // Para agregar las noticias
         the_notices.add(
                 NewsObj( // Objeto de prueba
-                        "Pérdidas en el sector textil guatemalteco ascienden a los US\$400 millones",
-                        "http://gtpreviene.researchmobile.co:3000/uploads/2ij5og5sq62uidkz_maquila.jpg",
-                        "<p>Las estimaciones preliminares dan cuenta de que las pérdidas ascienden a US$403 millones (unos Q3 mil 103 millones) por la paralización de trabajo en las plantas y en los compradores, ya que los clientes en los Estados Unidos han requerido suspender los pedidos de las prendas de vestir.<br/></p><p>El reporte se obtuvo con base a una encuesta a los agremiados de la Comisión de Vestuario y Textil (Vestex), adscrito a la Asociación Guatemalteca de Exportadores (Agexport), en la cual se preguntó a las empresas sobre la producción de las prendas luego de las medidas adoptadas el pasado 16 de marzo en Guatemala, así como la crisis sanitaria en los Estados Unidos que es el principal mercado a donde se despacha el producto.<br/></p><p>“Estados Unidos está en un paro total, eso representa pérdida y las cancelaciones van por los US$400 millones”, precisó Alejandro Ceballos, presidente de Vestex quien dijo que la situación es similar para Honduras, Nicaragua y El Salvador donde se manufactura ropa, pero que adquieren productos que se fabrican en Guatemala.<br/></p>"
-                ))*/
+                        "UVG",
+                        "https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg",
+                        "Hecho por: Cristian Laynez y Elean Rivas"
+                ))
 
         // Definir e instanciar la lista
         list = findViewById(R.id.rvNewsGt)
@@ -61,40 +64,49 @@ class newsGT : AppCompatActivity() {
         // Para dar click
         adapter = newsAdapter(the_notices, object:ClickListener {
             override fun onClick(view: View, index: Int) {
-                // Toast.makeText(applicationContext, "Prueba: " + index, Toast.LENGTH_SHORT).show()
                 Toast.makeText(applicationContext, "Prueba", Toast.LENGTH_SHORT).show()
+                seeDetail(index)
             }
         })
 
         list?.adapter = adapter
     }
 
-    private fun apiSolicitude(url:String){
+    private fun apiSolicitude(url:String, the_notices:ArrayList<NewsObj>){
         val queue = Volley.newRequestQueue(this)
+
         val request = StringRequest(Request.Method.GET, url, {
                 response ->
             try {
-                Log.d("", response)
+                Log.d("apiSolicitude", response)
 
                 // Se creará el objeto, en este caso será toda la información de las noticias
                 val gson = Gson()
                 val newsArray = gson.fromJson(response, array::class.java)
+
                 var the_size: Int = newsArray.size
                 var the_index: Int = the_size - 1
 
                 for(i in 0..the_index){
-                    the_notices.add(NewsObj(newsArray.get(i).title, newsArray.get(i).image, newsArray.get(i).detail))
+                    the_notices.add(
+                            NewsObj(newsArray.get(i).title,
+                            newsArray.get(i).image,
+                            newsArray.get(i).detail)
+                    )
                 }
 
             }catch (e: Exception){
                 Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
             }
         }, { })
+
         queue.add(request)
-
-
     }
 
-
+    private fun seeDetail(index: Int){
+        val intent = Intent(this, newsDetail::class.java)
+        intent.putExtra(TAG, index.toString())
+        startActivity(intent)
+    }
 
 }
