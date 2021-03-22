@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley
 import com.example.appproyecto.R
 import com.example.appproyecto.retrofitcustom.Utils
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 
 class newsDetail : AppCompatActivity() {
 
@@ -27,14 +28,18 @@ class newsDetail : AppCompatActivity() {
         the_image = findViewById(R.id.ivImageDetail)
         the_description = findViewById(R.id.tvContentDetail)
 
-        // apiSolicitud(Utils.URL_NOTICES_LIST)
-
         val the_detail = intent.getStringExtra("com.example.appproyecto.news.newsadapter.NEWSOBJ")
-        Toast.makeText(this,"Prueba: " + the_detail, Toast.LENGTH_SHORT).show()
 
+        apiSolicitud(Utils.URL_NOTICES_LIST, the_detail!!.toInt()-1)
+
+        if(the_detail.toInt() == 0){
+            the_title?.text = "APP UVG"
+            Picasso.get().load("https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg").into(the_image!!)
+            the_description?.text = "ULTIMA NOTICIA: APP Creada por:\nCristian Laynez y Elean Rivas"
+        }
     }
 
-    private fun apiSolicitud(url:String){
+    private fun apiSolicitud(url:String, index:Int){
         val queue = Volley.newRequestQueue(this)
 
         val request = StringRequest(Request.Method.GET, url, {
@@ -46,7 +51,9 @@ class newsDetail : AppCompatActivity() {
                 val gson = Gson()
                 val newsArray = gson.fromJson(response, newJson::class.java)
 
-
+                the_title?.text = newsArray.get(index).title
+                Picasso.get().load(newsArray.get(index).image).into(the_image!!)
+                the_description?.text = newsArray.get(index).detail
 
             }catch (e: Exception){
                 Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()

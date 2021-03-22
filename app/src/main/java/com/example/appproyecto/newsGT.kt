@@ -64,7 +64,6 @@ class newsGT : AppCompatActivity() {
         // Para dar click
         adapter = newsAdapter(the_notices, object:ClickListener {
             override fun onClick(view: View, index: Int) {
-                Toast.makeText(applicationContext, "Prueba", Toast.LENGTH_SHORT).show()
                 seeDetail(index)
             }
         })
