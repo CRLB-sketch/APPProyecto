@@ -3,7 +3,7 @@ package com.example.appproyecto.news
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> Statics </h2>
  *
- * Esta parte será donde se programará la parte de las estadísticas de Guatemala.
+ * Arreglo que contiene la lista de noticias
  *
  * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
  *
