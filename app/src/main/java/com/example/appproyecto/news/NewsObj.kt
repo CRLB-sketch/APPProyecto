@@ -1,7 +1,7 @@
 package com.example.appproyecto.news
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
- * <h2> Statics </h2>
+ * <h2> Objeto noticias </h2>
  *
  * objeto que toma la información que se muestra en el detalle de la noticia
  *

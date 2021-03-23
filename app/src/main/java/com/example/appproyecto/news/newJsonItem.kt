@@ -1,7 +1,7 @@
 package com.example.appproyecto.news
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
- * <h2> Statics </h2>
+ * <h2> newJsonItem </h2>
  *
  * JSon de la Api con los parametros recibidos de la noticia
  *

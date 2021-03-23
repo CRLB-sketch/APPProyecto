@@ -1,7 +1,7 @@
 package com.example.appproyecto
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
- * <h2> Statics </h2>
+ * <h2> Noticias Main </h2>
  *
  * Main Class de las noticias.
  *
