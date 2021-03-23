@@ -1,5 +1,18 @@
 package com.example.appproyecto.news
-
+/**
+ * <h1> Proyecto APP - Guate-Covidianos </h1>
+ * <h2> Statics </h2>
+ *
+ * Esta parte será donde se programará la parte de las estadísticas de Guatemala.
+ *
+ * <p>Desarrollo de Plataformas Moviles - Universidad del Valle de Guatemala </p>
+ *
+ * Creado por:
+ * @author [Cristian Laynez, Elean Rivas]
+ * @version 1.0
+ * @since 2020-Enero-19
+ *
+ **/
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +39,8 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
 
     /***
      * Funcionamiento del viewHolder
+     * @see vista listado de noticias
+     * @param
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         val the_view = LayoutInflater.from(parent?.context).inflate(R.layout.item_new, parent, false)
@@ -46,11 +61,13 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
 
     /***
      * Cuenta la cantidad de items
+     * @return tamaño de la lista
      */
     override fun getItemCount(): Int {
         return items?.count()!!
     }
 
+    //Clase holder, para el item de las noticias
     class NewsHolder(view: View, listener: ClickListener): RecyclerView.ViewHolder(view), View.OnClickListener {
 
         var view = view
@@ -71,6 +88,8 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
 
         /***
          * Funcion cuando hagan click en un objeto de la noticia
+         * @see ventana de retroalimentación del click
+         * @param vista a obtener
          */
         override fun onClick(v: View?) {
             this.listener?.onClick(v!!, adapterPosition)
