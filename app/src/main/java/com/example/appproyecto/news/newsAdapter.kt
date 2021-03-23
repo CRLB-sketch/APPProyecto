@@ -14,8 +14,10 @@ import kotlinx.android.synthetic.main.item_new.view.*
 
 class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): RecyclerView.Adapter<newsAdapter.NewsHolder>() {
 
+    //Arraylist para almacenar las noticias
     var items: ArrayList<NewsObj>? = null
 
+    //Holder para el recyclerviewer
     var viewHolder: NewsHolder? = null
 
     init {

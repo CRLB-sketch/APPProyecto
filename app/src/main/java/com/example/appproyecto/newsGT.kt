@@ -27,15 +27,18 @@ import java.net.URL
 
 class newsGT : AppCompatActivity() {
 
-    var list: RecyclerView? = null
-    var adapter: newsAdapter? = null
-    var layourManeger: RecyclerView.LayoutManager? = null
+    var list: RecyclerView? = null //Recycler viewer para la lista de noticias
+    var adapter: newsAdapter? = null //Adapter para el funcionamiento de la lista
+    var layourManeger: RecyclerView.LayoutManager? = null //Vista del recyclerViewer
 
-    val TAG = "com.example.appproyecto.news.newsadapter.NEWSOBJ"
+    val TAG = "com.example.appproyecto.news.newsadapter.NEWSOBJ" //Ruta del objeto de noticias
 
     // ArrayList para agregar las noticias
     var the_notices = ArrayList<NewsObj>()
 
+    /***
+     * Estado activo de las noticias
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_g_t)
@@ -60,6 +63,9 @@ class newsGT : AppCompatActivity() {
         list?.adapter = adapter
     }
 
+    /***
+     * Método de apoyo para el recyclerviewer
+     */
     private fun refreshLayout(){
         // Definir e instanciar la lista
         list = findViewById(R.id.rvNewsGt)
@@ -69,6 +75,9 @@ class newsGT : AppCompatActivity() {
         list?.layoutManager = layourManeger
     }
 
+    /***
+     * Verifica y carga la appi necesaria para la solicitud de información
+     */
     private fun apiSolicitude(url:String) {
         val queue = Volley.newRequestQueue(this)
 
@@ -112,6 +121,9 @@ class newsGT : AppCompatActivity() {
         refreshLayout()
     }
 
+    /***
+     * Nos permite ingresar a la noticia y ver todos los detalles
+     */
     private fun seeDetail(index: Int){
         val intent = Intent(this, newsDetail::class.java)
         intent.putExtra(TAG, index.toString())

@@ -16,14 +16,24 @@ import com.squareup.picasso.Picasso
 
 class newsDetail : AppCompatActivity() {
 
+    /***
+     * Estás variables son el contenido de las noticias
+     * the_tile: título
+     * the_image: la imagen a mostrar
+     * the_description: el cuerpo de la noticia
+     */
     var the_title: TextView? = null
     var the_image: ImageView? = null
     var the_description: TextView? = null
 
+    /***
+     * Estado activo del detalle
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
 
+        //los cargamos con el id del layout
         the_title = findViewById(R.id.tvTittleDetail)
         the_image = findViewById(R.id.ivImageDetail)
         the_description = findViewById(R.id.tvContentDetail)
@@ -39,6 +49,9 @@ class newsDetail : AppCompatActivity() {
         }
     }
 
+    /***
+     * Solicitud de la api
+     */
     private fun apiSolicitud(url:String, index:Int){
         val queue = Volley.newRequestQueue(this)
 
