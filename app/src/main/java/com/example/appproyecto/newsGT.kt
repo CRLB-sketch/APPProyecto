@@ -33,45 +33,43 @@ class newsGT : AppCompatActivity() {
 
     val TAG = "com.example.appproyecto.news.newsadapter.NEWSOBJ"
 
+    // ArrayList para agregar las noticias
+    var the_notices = ArrayList<NewsObj>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_g_t)
 
-        // ArrayList para agregar las noticias
-        val the_notices = ArrayList<NewsObj>()
-
         if(Network.avalibleRed(this)){
-            apiSolicitude(Utils.URL_NOTICES_LIST, the_notices)
+
+            apiSolicitude(Utils.URL_NOTICES_LIST)
+
         }else{
             Toast.makeText(this,"No hay conexion", Toast.LENGTH_SHORT).show()
         }
-
-        // Para agregar las noticias
-        the_notices.add(
-                NewsObj( // Objeto de prueba
-                        "UVG",
-                        "https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg",
-                        "Hecho por: Cristian Laynez y Elean Rivas"
-                ))
-
-        // Definir e instanciar la lista
-        list = findViewById(R.id.rvNewsGt)
-        list?.setHasFixedSize(true)
-
-        layourManeger = LinearLayoutManager(this)
-        list?.layoutManager = layourManeger
 
         // Para dar click
         adapter = newsAdapter(the_notices, object:ClickListener {
             override fun onClick(view: View, index: Int) {
                 seeDetail(index)
+
+                // refreshLayout()
             }
         })
 
         list?.adapter = adapter
     }
 
-    private fun apiSolicitude(url:String, the_notices:ArrayList<NewsObj>){
+    private fun refreshLayout(){
+        // Definir e instanciar la lista
+        list = findViewById(R.id.rvNewsGt)
+        list?.setHasFixedSize(true)
+
+        layourManeger = LinearLayoutManager(this)
+        list?.layoutManager = layourManeger
+    }
+
+    private fun apiSolicitude(url:String) {
         val queue = Volley.newRequestQueue(this)
 
         val request = StringRequest(Request.Method.GET, url, {
@@ -86,13 +84,24 @@ class newsGT : AppCompatActivity() {
                 var the_size: Int = newsArray.size
                 var the_index: Int = the_size - 1
 
+                // Para agregar las noticias
+                the_notices.add(
+                        NewsObj( // Objeto de prueba
+                                "UVG",
+                                "https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg",
+                                "Hecho por: Cristian Laynez y Elean Rivas"))
+
                 for(i in 0..the_index){
                     the_notices.add(
-                            NewsObj(newsArray.get(i).title,
+                            NewsObj(
+                            newsArray.get(i).title,
                             newsArray.get(i).image,
                             newsArray.get(i).detail)
                     )
+
                 }
+
+            refreshLayout()
 
             }catch (e: Exception){
                 Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
@@ -100,6 +109,7 @@ class newsGT : AppCompatActivity() {
         }, { })
 
         queue.add(request)
+        refreshLayout()
     }
 
     private fun seeDetail(index: Int){

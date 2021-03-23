@@ -56,7 +56,9 @@ class newsDetail : AppCompatActivity() {
                 the_description?.text = newsArray.get(index).detail
 
             }catch (e: Exception){
-                Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
+                if(index != 0){
+                    Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
+                }
             }
         }, { })
 
