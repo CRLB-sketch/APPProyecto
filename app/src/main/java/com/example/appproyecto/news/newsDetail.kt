@@ -64,6 +64,7 @@ class newsDetail : AppCompatActivity() {
                 val gson = Gson()
                 val newsArray = gson.fromJson(response, newJson::class.java)
 
+                //carga de archivos desde la api
                 the_title?.text = newsArray.get(index).title
                 Picasso.get().load(newsArray.get(index).image).into(the_image!!)
                 the_description?.text = newsArray.get(index).detail
