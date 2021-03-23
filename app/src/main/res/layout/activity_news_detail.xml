@@ -32,20 +32,30 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTittleDetail"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/tvContentDetail"
-        android:layout_width="330dp"
-        android:layout_height="268dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="tv"
-        android:textSize="18sp"
-        android:textColor="@color/blue_700"
+    <ScrollView
+        android:layout_width="320dp"
+        android:layout_height="283dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivImageDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/ivImageDetail">
+
+        <TextView
+            android:id="@+id/tvContentDetail"
+            android:layout_width="302dp"
+            android:layout_height="311dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="tv"
+            android:textColor="@color/blue_700"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivImageDetail" />
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,9 @@ class newsGT : AppCompatActivity() {
         setContentView(R.layout.activity_news_g_t)
 
 
-
+        /***
+         * Comprueba la conexión a internet
+         */
         if(Network.avalibleRed(this)){
             apiSolicitude(Utils.URL_NOTICES_LIST)
         }else{
@@ -69,6 +71,9 @@ class newsGT : AppCompatActivity() {
         list?.adapter = adapter
     }
 
+    /***
+     * solicita el api para la información de las noticias
+     */
     private fun apiSolicitude(url:String){
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(Request.Method.GET, url, {

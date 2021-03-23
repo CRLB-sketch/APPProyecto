@@ -22,6 +22,9 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
         this.items = items
     }
 
+    /***
+     * Funcionamiento del viewHolder
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         val the_view = LayoutInflater.from(parent?.context).inflate(R.layout.item_new, parent, false)
         viewHolder = NewsHolder(the_view, listener)
@@ -29,6 +32,9 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
         return viewHolder!!
     }
 
+    /***
+     * Items del holder
+     */
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
         val item = items?.get(position)
 
@@ -36,6 +42,9 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
         Picasso.get().load(item?.image).into(viewHolder?.image)
     }
 
+    /***
+     * Cuenta la cantidad de items
+     */
     override fun getItemCount(): Int {
         return items?.count()!!
     }
@@ -58,6 +67,9 @@ class newsAdapter(items:ArrayList<NewsObj>, val listener: ClickListener): Recycl
             view.setOnClickListener(this)
         }
 
+        /***
+         * Funcion cuando hagan click en un objeto de la noticia
+         */
         override fun onClick(v: View?) {
             this.listener?.onClick(v!!, adapterPosition)
         }

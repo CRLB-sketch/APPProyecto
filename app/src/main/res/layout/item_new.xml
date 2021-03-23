@@ -4,7 +4,9 @@
     android:layout_height="150dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:layout_margin="@dimen/box_inset_layout_padding">
+
 
     <ImageView
         android:id="@+id/ivImageM"
