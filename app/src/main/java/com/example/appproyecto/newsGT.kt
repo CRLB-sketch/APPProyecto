@@ -110,13 +110,6 @@ class newsGT : AppCompatActivity() {
                 var the_size: Int = newsArray.size
                 var the_index: Int = the_size - 1
 
-                // Para agregar las noticias
-                the_notices.add(
-                        NewsObj( // Objeto de prueba
-                                "UVG",
-                                "https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg",
-                                "Hecho por: Cristian Laynez y Elean Rivas"))
-
                 for(i in 0..the_index){
                     the_notices.add(
                             NewsObj(

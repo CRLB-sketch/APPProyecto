@@ -53,13 +53,8 @@ class newsDetail : AppCompatActivity() {
 
         val the_detail = intent.getStringExtra("com.example.appproyecto.news.newsadapter.NEWSOBJ")
 
-        apiSolicitud(Utils.URL_NOTICES_LIST, the_detail!!.toInt()-1)
+        apiSolicitud(Utils.URL_NOTICES_LIST, the_detail!!.toInt())
 
-        if(the_detail.toInt() == 0){
-            the_title?.text = "APP UVG"
-            Picasso.get().load("https://www.uvg.edu.gt/wp-content/uploads/socialshare-logo.jpg").into(the_image!!)
-            the_description?.text = "ULTIMA NOTICIA: APP Creada por:\nCristian Laynez y Elean Rivas"
-        }
     }
 
     /***
