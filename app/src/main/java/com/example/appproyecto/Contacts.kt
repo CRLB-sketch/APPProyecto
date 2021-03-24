@@ -45,13 +45,19 @@ class Contactos : AppCompatActivity() {
 
     // --> Atributos Globales
     var list: ListView? = null
-    var adapter: AdapterCustom? = null
+
     val REQUEST_PHONE_CALL = 1
-    var auxPos: Int = 0
+    var auxPhone: String = ""
 
     // --> Transformar en un objeto estático
     companion object {
         var emergencyContacts:ArrayList<Data>? = null
+        var adapter: AdapterCustom? = null
+
+        // Método para obtener el numero correcto
+        fun getEContact(index:Int):Data{
+            return adapter?.getItem(index) as Data
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,8 +116,6 @@ class Contactos : AppCompatActivity() {
                 list = findViewById<ListView>(R.id.the_list)
                 adapter = AdapterCustom(this, emergencyContacts!!)
 
-                list?.adapter = adapter
-
                 // // Para hacer una llamada
                 list?.setOnItemClickListener { parent, view, position, id ->
 
@@ -120,11 +124,15 @@ class Contactos : AppCompatActivity() {
                         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE) ,REQUEST_PHONE_CALL)
                     }else{
                         // Si se accedio el permiso esta en orden se procederá a realizar la llamada
-                        auxPos = position
+                        val the_correct = getEContact(position)
+                        auxPhone = the_correct.phone.toString()
+
                         makeCall()
                     }
 
                 }
+
+                list?.adapter = adapter
 
             }catch (e: Exception){ // Por sí ocurre algo inesperado
                 Toast.makeText(this,"Acaba de ocurrir un error", Toast.LENGTH_SHORT).show()
@@ -139,7 +147,7 @@ class Contactos : AppCompatActivity() {
      */
     private fun makeCall(){
         val callIntent = Intent(Intent.ACTION_CALL)
-        callIntent.data = Uri.parse("tel:" + emergencyContacts?.get(auxPos)?.phone.toString())
+        callIntent.data = Uri.parse("tel:" + auxPhone)
         startActivity(callIntent)
     }
 
