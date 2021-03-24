@@ -30,10 +30,12 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
 
     // --> Atributos
     var items:ArrayList<Data>? = null
+    var copyItems:ArrayList<Data>? = null
 
     // --> Constructor
     init {
-        this.items = items
+        this.items = ArrayList(items)
+        this.copyItems = items
     }
 
     // --> Métodos
@@ -45,6 +47,34 @@ class AdapterCustom(var context:Context, items:ArrayList<Data>):BaseAdapter() {
      */
     override fun getCount(): Int {
         return this.items?.count()!!
+    }
+
+    /**
+     * Método para filtrar la información
+     *
+     * @param       El texto para buscar
+     */
+    fun filterInfo(str:String){
+        items?.clear()
+
+        if(str.isEmpty()){
+            items = ArrayList(copyItems)
+            notifyDataSetChanged()
+            return
+        }
+
+        var search = str
+        search = search.toLowerCase()
+
+        for(item in copyItems!!){
+            val title = item.title.toLowerCase()
+
+            if(title.contains(search)){
+                items?.add(item)
+            }
+        }
+
+        notifyDataSetChanged()
     }
 
     /**

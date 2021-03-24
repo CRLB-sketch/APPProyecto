@@ -1,4 +1,5 @@
 package com.example.appproyecto.news
+
 /**
  * <h1> Proyecto APP - Guate-Covidianos </h1>
  * <h2> ArrayJson </h2>
@@ -13,4 +14,5 @@ package com.example.appproyecto.news
  * @since 2020-Enero-19
  *
  **/
+
 class newJson : ArrayList<newJsonItem>()

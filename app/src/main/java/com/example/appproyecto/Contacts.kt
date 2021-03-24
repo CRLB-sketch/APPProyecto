@@ -15,6 +15,8 @@ package com.example.appproyecto
  *
  **/
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -23,6 +25,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.widget.ListView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
@@ -153,6 +156,7 @@ class Contactos : AppCompatActivity() {
 
     /**
      * Método para tener las opciones que se pueden llevar a cabo
+     * Como por ejemplo buscar un contacto en específico
      *
      * @param menu  Este mismo menu
      * @return      El menu creado
@@ -160,6 +164,32 @@ class Contactos : AppCompatActivity() {
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_emergency_contact, menu)
+
+        val serchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val itemSearch = menu?.findItem(R.id.searchView)
+        val searchView = itemSearch?.actionView as SearchView
+
+        searchView.setSearchableInfo(serchManager.getSearchableInfo(componentName))
+        searchView.queryHint = "Buscar contacto..."
+
+        searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            // Nos servira para preparar los datos
+
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Para filtrar los datos
+                adapter?.filterInfo(newText!!)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Tambien para filtrar la informacion
+                return true
+            }
+        })
+
         return super.onCreateOptionsMenu(menu)
     }
 

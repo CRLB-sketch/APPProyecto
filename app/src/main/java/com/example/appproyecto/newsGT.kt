@@ -78,7 +78,7 @@ class newsGT : AppCompatActivity() {
 
     /***
      * Método de apoyo para el recyclerviewer
-     * @param
+     *
      * @see vista layout
      */
     private fun refreshLayout(){
@@ -92,6 +92,7 @@ class newsGT : AppCompatActivity() {
 
     /***
      * Verifica y carga la appi necesaria para la solicitud de información
+     *
      * @see carga de la api
      * @param url de la api
      */
@@ -133,6 +134,7 @@ class newsGT : AppCompatActivity() {
 
     /***
      * Nos permite ingresar a la noticia y ver todos los detalles
+     *
      * @param posicion de la noticia
      * @see inicia la noticia
      */
